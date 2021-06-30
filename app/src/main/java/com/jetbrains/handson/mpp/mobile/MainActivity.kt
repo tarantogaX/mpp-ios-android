@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         val url =
             "https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/$departureCode/$arrivalCode/#LiveDepResults"
 
-        presenter.getTrainTimes()
+        presenter.getTrainTimes(departureCode, arrivalCode)
 
 //        println("printed msg")
 

@@ -32,21 +32,21 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
         }
     }
 
-    public fun getTrainTimes() {
+    public fun getTrainTimes(departureStation: String, arrivalStation: String) {
         launch {
-            val response: SerializableResponse = client.request("https://mobile-api-softwire2.lner.co.uk/v1/fares?originStation=LDS&destinationStation=KGX&noChanges=false&numberOfAdults=2&numberOfChildren=0&journeyType=single&outboundDateTime=2021-07-24T14%3A30%3A00.000%2B01%3A00&outboundIsArriveBy=false")
-//        val response: HttpResponse = client.request("https://mobile-api-softwire2.lner.co.uk/v1/fares/") {
-//                method = HttpMethod.Get
-//                parameter("originStation", "LDS")
-//                parameter("destinationStation", "KGX")
-//                parameter("noChanges", "false")
-//                parameter("numberOfAdults", "1")
-//                parameter("numberOfChildren", "0")
-//                parameter("journeyType", "single")
-//                parameter("outboundDateTime", "2021-07-24T14%3A30%3A00.000%2B01%3A00")
-//                parameter("outboundIsArriveBy", "false")
-//            }
-            println(response)
+            val response: SerializableResponse = client.request("https://mobile-api-softwire2.lner.co.uk/v1/fares?originStation=$departureStation&destinationStation=$arrivalStation&noChanges=false&numberOfAdults=2&numberOfChildren=0&journeyType=single&outboundDateTime=2021-07-24T14%3A30%3A00.000%2B01%3A00&outboundIsArriveBy=false")
+        /*val response: SerializableResponse = client.request("https://mobile-api-softwire2.lner.co.uk/v1/fares/") {
+                method = HttpMethod.Get
+                parameter("originStation", departureStation)
+                parameter("destinationStation", arrivalStation)
+                parameter("noChanges", "false")
+                parameter("numberOfAdults", "1")
+                parameter("numberOfChildren", "0")
+                parameter("journeyType", "single")
+                parameter("outboundDateTime", "2021-07-24T14%3A30%3A00.000%2B01%3A00")
+                parameter("outboundIsArriveBy", "false")
+            }*/
+            println(response.outboundJourneys)
         }
 
 //        val response: HttpResponse = client.request(
