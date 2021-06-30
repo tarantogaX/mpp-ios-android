@@ -47,5 +47,4 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         intent.data = Uri.parse(url)
         startActivity(intent)
     }
-
 }
