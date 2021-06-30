@@ -29,8 +29,5 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
     }
 
     suspend fun getLiveTimes(originCode: String, destinationCode: String) {
-        client.get<HttpResponse>{
-            url()
-        }
     }
 }
