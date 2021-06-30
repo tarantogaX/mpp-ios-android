@@ -48,5 +48,4 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         startActivity(intent)
     }
 
-    //https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/YRK/KGX/#LiveDepResults
 }
