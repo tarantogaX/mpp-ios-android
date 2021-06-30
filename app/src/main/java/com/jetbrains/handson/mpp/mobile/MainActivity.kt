@@ -8,20 +8,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Spinner
 import android.widget.TextView
-import io.ktor.client.HttpClient
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.json.serializer.KotlinxSerializer
 
 class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
     lateinit var departureStationSpinner: Spinner
     lateinit var arrivalStationSpinner: Spinner
-
-    val client = HttpClient() {
-        install(JsonFeature) {
-            serializer = KotlinxSerializer()
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,20 +33,23 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
     fun onSubmitClicked(view: View) {
 
-        /*var departureCode = departureStationSpinner.selectedItem.toString()
+        var departureCode = departureStationSpinner.selectedItem.toString()
         val ld = departureCode.length
         departureCode = departureCode.substring(ld - 4, ld - 1)
 
         var arrivalCode = arrivalStationSpinner.selectedItem.toString()
         val ad = arrivalCode.length
         arrivalCode = arrivalCode.substring(ad - 4, ad - 1)
+        //val currentTime = LocalDateTime.now()
+        //println(currentTime.toString())
+        //val apiCall = "https://mobile-api-softwire2.lner.co.uk/v1/fares?originStation=$departureCode&destinationStation=$arrivalCode&outboundDateTime=${currentTime.toString()}"
         val url =
             "https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/$departureCode/$arrivalCode/#LiveDepResults"
 
 
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
-        startActivity(intent)*/
+        startActivity(intent)
     }
 }
 //o
