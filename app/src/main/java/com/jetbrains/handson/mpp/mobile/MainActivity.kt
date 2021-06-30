@@ -2,16 +2,26 @@ package com.jetbrains.handson.mpp.mobile
 
 import android.content.Intent
 import android.net.Uri
+import android.net.http.HttpResponseCache.install
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Spinner
 import android.widget.TextView
+import io.ktor.client.HttpClient
+import io.ktor.client.features.json.JsonFeature
+import io.ktor.client.features.json.serializer.KotlinxSerializer
 
 class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
     lateinit var departureStationSpinner: Spinner
     lateinit var arrivalStationSpinner: Spinner
+
+    val client = HttpClient() {
+        install(JsonFeature) {
+            serializer = KotlinxSerializer()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +42,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
     fun onSubmitClicked(view: View) {
 
-        var departureCode = departureStationSpinner.selectedItem.toString()
+        /*var departureCode = departureStationSpinner.selectedItem.toString()
         val ld = departureCode.length
         departureCode = departureCode.substring(ld - 4, ld - 1)
 
@@ -45,7 +55,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
-        startActivity(intent)
+        startActivity(intent)*/
     }
 }
 //o
