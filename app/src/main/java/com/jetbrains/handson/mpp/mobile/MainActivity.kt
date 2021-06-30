@@ -48,4 +48,4 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         startActivity(intent)
     }
 }
-//
+//o
