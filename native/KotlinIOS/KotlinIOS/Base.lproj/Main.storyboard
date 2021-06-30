@@ -44,7 +44,7 @@
                     </view>
                     <connections>
                         <outlet property="pickerViewArrival" destination="qAB-Bn-hsy" id="lzX-7b-bqd"/>
-                        <outlet property="pickerViewDeparture" destination="3X6-Bq-Jwl" id="ldx-k8-seZ"/>
+                        <outlet property="pickerViewDeparture" destination="3X6-Bq-Jwl" id="Lf7-rK-cJj"/>
                         <outlet property="submitButton" destination="myZ-eq-tLf" id="Ur0-dS-oxP"/>
                     </connections>
                 </viewController>

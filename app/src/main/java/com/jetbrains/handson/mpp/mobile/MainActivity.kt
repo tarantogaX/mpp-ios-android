@@ -7,23 +7,25 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Spinner
 import android.widget.TextView
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
     lateinit var departureStationSpinner: Spinner
     lateinit var arrivalStationSpinner: Spinner
 
+    private val presenter: ApplicationPresenter = ApplicationPresenter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val presenter = ApplicationPresenter()
         presenter.onViewTaken(this)
 
         departureStationSpinner = findViewById<Spinner>(R.id.stations_spinner1) as Spinner
         arrivalStationSpinner = findViewById<Spinner>(R.id.stations_spinner2) as Spinner
         departureStationSpinner.setSelection(0)
-        arrivalStationSpinner.setSelection(1)
+        arrivalStationSpinner.setSelection(0)
     }
 
     override fun setLabel(text: String) {
@@ -42,10 +44,12 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         val url =
             "https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/$departureCode/$arrivalCode/#LiveDepResults"
 
+        presenter.getTrainTimes()
 
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(url)
-        startActivity(intent)
+//        println("printed msg")
+
+//        val intent = Intent(Intent.ACTION_VIEW)
+//        intent.data = Uri.parse(url)
+//        startActivity(intent)
     }
 }
-//o
