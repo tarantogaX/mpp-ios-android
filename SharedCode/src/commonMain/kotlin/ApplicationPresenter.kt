@@ -3,6 +3,8 @@ package com.jetbrains.handson.mpp.mobile
 import io.ktor.client.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -24,5 +26,11 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
     override fun onViewTaken(view: ApplicationContract.View) {
         this.view = view
         view.setLabel(createApplicationScreenMessage())
+    }
+
+    suspend fun getLiveTimes(originCode: String, destinationCode: String) {
+        client.get<HttpResponse>{
+            url()
+        }
     }
 }

@@ -46,10 +46,8 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         val url =
             "https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/$departureCode/$arrivalCode/#LiveDepResults"
 
-
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(url)
         startActivity(intent)
     }
 }
-//o
