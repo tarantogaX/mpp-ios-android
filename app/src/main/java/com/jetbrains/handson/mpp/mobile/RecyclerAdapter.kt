@@ -1,5 +1,6 @@
 package com.jetbrains.handson.mpp.mobile
 
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -11,7 +12,8 @@ class RecyclerAdapter(private val times: ArrayList<OutboundJourney>): RecyclerVi
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        TODO("Not yet implemented")
+        val inflatedView = parent.inflate(R.layout.recyclerview_item_row, false)
+        return ViewHolder(inflatedView)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -22,7 +24,7 @@ class RecyclerAdapter(private val times: ArrayList<OutboundJourney>): RecyclerVi
         return times.size
     }
 
-    inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(v: View): RecyclerView.ViewHolder(v) {
         var departureTime: TextView
         var arrivalTime: TextView
 
