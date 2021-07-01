@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Spinner
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+//import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.runBlocking
 import kotlinx.android.synthetic.main.activity_main.*
 
