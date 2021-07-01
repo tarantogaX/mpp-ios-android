@@ -54,9 +54,13 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let dep = pickerViewDeparture.selectedRow(inComponent: 0)
         let departure = stations[dep].suffix(4).prefix(3)
         let arrival = stations[arr].suffix(4).prefix(3)
-        if let url = URL(string: "https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/" + departure + "/" + arrival +  "/#LiveDepResults") {
-            UIApplication.shared.open(url)
-        }
+        
+        let presenter = ApplicationPresenter()
+        presenter.getTrainTimes(departureStation: String(departure), arrivalStation: String(arrival))
+        
+//        if let url = URL(string: "https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/" + departure + "/" + arrival +  "/#LiveDepResults") {
+//            UIApplication.shared.open(url)
+//        }
     }
     
     override func viewDidLoad() {
