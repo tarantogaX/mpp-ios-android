@@ -7,18 +7,26 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.runBlocking
+import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
     lateinit var departureStationSpinner: Spinner
     lateinit var arrivalStationSpinner: Spinner
+    private lateinit var linearLayoutManager: LinearLayoutManager
 
     private val presenter: ApplicationPresenter = ApplicationPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        linearLayoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = linearLayoutManager
 
         presenter.onViewTaken(this)
 
