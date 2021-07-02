@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
     lateinit var arrivalStationSpinner: Spinner
     private lateinit var linearLayoutManager: LinearLayoutManager
 
+    lateinit var adapter: RecyclerAdapter
+
 //    private lateinit var linearLayoutManager: RecyclerView.LinearLayoutManager
 
     private val presenter: ApplicationPresenter = ApplicationPresenter()
@@ -27,8 +29,12 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         setContentView(R.layout.activity_main)
 
         linearLayoutManager = LinearLayoutManager(this)
+        var recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = linearLayoutManager
 
+
+        adapter = RecyclerAdapter(this, listOf(OutboundJourney(arrivalTime = "Test", departureTime = "Test"), OutboundJourney(arrivalTime = "Test", departureTime = "Test"),OutboundJourney(arrivalTime = "Test", departureTime = "Test"),OutboundJourney(arrivalTime = "Test", departureTime = "Test")))
+        recyclerView.adapter = adapter
         presenter.onViewTaken(this)
 
         departureStationSpinner = findViewById<Spinner>(R.id.stations_spinner1) as Spinner
@@ -62,6 +68,8 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
         presenter.getTrainTimes(departureCode, arrivalCode)
 
+
+
 //        println("printed msg")
 
 //        val intent = Intent(Intent.ACTION_VIEW)
@@ -71,5 +79,14 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
     override fun updateSearchResults(results: List<String>) {
 
+    }
+
+    override fun getOutboundJourneyObjects(outboundJourneys: List<OutboundJourney>) {
+        linearLayoutManager = LinearLayoutManager(this)
+        var recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = linearLayoutManager
+
+        adapter = RecyclerAdapter(this, outboundJourneys)
+        recyclerView.adapter = adapter
     }
 }

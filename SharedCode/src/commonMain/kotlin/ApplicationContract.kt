@@ -7,6 +7,7 @@ interface ApplicationContract {
         fun setLabel(text: String)
         fun updateSearchResults(results: List<String>)
         fun onGetStationsList(stations: List<String>, codes: List<String>)
+        fun getOutboundJourneyObjects(outboundJourneys: List<OutboundJourney>)
     }
 
     abstract class Presenter: CoroutineScope {

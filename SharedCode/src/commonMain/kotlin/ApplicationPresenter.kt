@@ -54,10 +54,11 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
             serializer = KotlinxSerializer(kotlinx.serialization.json.Json { this.ignoreUnknownKeys = true; this.isLenient = true})
         }
     }
-    
-    fun updateSearchResults(results: List<String>) {
+
+  fun updateSearchResults(results: List<String>, outboundJourneys: List<OutboundJourney>) {
         this.view?.setLabel("a")
         this.view?.updateSearchResults(results)
+        this.view?.getOutboundJourneyObjects(outboundJourneys)
     }
 
     public override fun getTrainTimes(departureStation: String, arrivalStation: String) {
@@ -68,7 +69,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
             val response: SerializableResponse = client.request("https://mobile-api-softwire2.lner.co.uk/v1/fares?originStation=$departureStation&destinationStation=$arrivalStation&noChanges=false&numberOfAdults=2&numberOfChildren=0&journeyType=single&outboundDateTime=2021-07-24T14%3A30%3A00.000%2B01%3A00&outboundIsArriveBy=false")
 
            updateSearchResults(
-                serializableResponseToStringArray(response))
+                serializableResponseToStringArray(response), response.outboundJourneys)
 
         }
     }
