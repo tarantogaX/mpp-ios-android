@@ -4,7 +4,6 @@ import SharedCode
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource, ApplicationContractView
 {
     func setLabel(text: String) {
-        print("zzzzžzzzzžzzzzžzzzzžzzzzžzzzzž")
     }
     
     @IBOutlet private var label: UILabel!
@@ -30,7 +29,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     private let presenter: ApplicationContractPresenter = ApplicationPresenter()
     
-    let stations = ["Colchester [COL]","Ipswich [IPS]","Birmingham New Street [BHM]","Kings Cross [KGX]", "Cambridge [CBG]"]
+    var stations: [String] = []
+    //"Colchester","Ipswich","Birmingham New Street","Kings Cross", "Cambridge"
+    
+    var codes: [String] = []
+    //"COL","IPS","BHM","KGX", "CBG"
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -63,16 +66,23 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     
     @IBAction func buttonTapped(_ sender: UIButton) {
-        let arr = pickerViewArrival.selectedRow(inComponent: 0)
-        let dep = pickerViewDeparture.selectedRow(inComponent: 0)
-        let departure = stations[dep].suffix(4).prefix(3)
-        let arrival = stations[arr].suffix(4).prefix(3)
+        let departure = codes[pickerViewDeparture.selectedRow(inComponent: 0)]
+        let arrival = codes[pickerViewArrival.selectedRow(inComponent: 0)]
         
         presenter.getTrainTimes(departureStation: String(departure), arrivalStation: String(arrival))
+        
+//        onGetStationsList(stations: ["cdc", "dewfd", "dewf"], codes: ["wer", "sdf", "fe7"])
     }
     
     func updateSearchResults(results: [String]) {
         tableRows = results
         self.trainsTable.reloadData()
+    }
+    
+    func onGetStationsList(stations newStations: [String], codes newCodes: [String]) {
+            stations = newStations
+            codes = newCodes
+        self.pickerViewDeparture.reloadComponent(0)
+        self.pickerViewArrival.reloadComponent(0)
     }
 }

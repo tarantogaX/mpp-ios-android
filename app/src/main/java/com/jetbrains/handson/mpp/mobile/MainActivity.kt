@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
     lateinit var departureStationSpinner: Spinner
     lateinit var arrivalStationSpinner: Spinner
     private lateinit var linearLayoutManager: LinearLayoutManager
+
     lateinit var adapter: RecyclerAdapter
 
 //    private lateinit var linearLayoutManager: RecyclerView.LinearLayoutManager
@@ -34,8 +35,6 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
         adapter = RecyclerAdapter(this, listOf(OutboundJourney(arrivalTime = "Test", departureTime = "Test"), OutboundJourney(arrivalTime = "Test", departureTime = "Test"),OutboundJourney(arrivalTime = "Test", departureTime = "Test"),OutboundJourney(arrivalTime = "Test", departureTime = "Test")))
         recyclerView.adapter = adapter
-
-
         presenter.onViewTaken(this)
 
         departureStationSpinner = findViewById<Spinner>(R.id.stations_spinner1) as Spinner
@@ -49,6 +48,10 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
     override fun setLabel(text: String) {
         //findViewById<TextView>(R.id.main_text).text = text
+    }
+
+    override fun onGetStationsList(stations: List<String>, codes: List<String>) {
+
     }
 
     fun onSubmitClicked(view: View) {

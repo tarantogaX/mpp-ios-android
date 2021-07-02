@@ -73,6 +73,4 @@ class RecyclerAdapter(context: Context, journeys: List<OutboundJourney>) : Recyc
         var departureTime: TextView = view.findViewById(R.id.departure_time)
         var arrivalTime: TextView = view.findViewById(R.id.arrival_time)
     }
-
-
 }

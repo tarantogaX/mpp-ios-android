@@ -17,6 +17,12 @@ data class OutboundJourney(val departureTime: String, val arrivalTime: String) {
 @Serializable
 data class SerializableResponse(val numberOfAdults: Int, val numberOfChildren: Int, val outboundJourneys: List<OutboundJourney>) {}
 
+@Serializable
+data class Station(val name: String, val crs: String?){}
+
+@Serializable
+data class SerializableStations(val stations: List<Station>){}
+
 class ApplicationPresenter: ApplicationContract.Presenter() {
 
     private val dispatchers = AppDispatchersImpl()
@@ -25,13 +31,20 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
 
     override fun onViewTaken(view: ApplicationContract.View) {
         this.view = view
+        getStations()
 //        view.setLabel(createApplicationScreenMessage())
+    }
+
+    private fun dateToTime(date: String): String {
+        val time = date.removeRange(0, 11)
+        return time.removeRange(5, time.length)
     }
 
     private fun serializableResponseToStringArray(serializableResponse: SerializableResponse): List<String> {
         var result: MutableList<String> = mutableListOf<String>()
         for (journey in serializableResponse.outboundJourneys) {
-            result.add("${journey.departureTime} - ${journey.arrivalTime}")
+            result.add("${dateToTime(journey.departureTime)} " +
+                    "- ${dateToTime(journey.arrivalTime)}")
         }
         return result
     }
@@ -42,7 +55,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
         }
     }
 
-    fun updateSearchResults(results: List<String>, outboundJourneys: List<OutboundJourney>) {
+  fun updateSearchResults(results: List<String>, outboundJourneys: List<OutboundJourney>) {
         this.view?.setLabel("a")
         this.view?.updateSearchResults(results)
         this.view?.getOutboundJourneyObjects(outboundJourneys)
@@ -51,20 +64,34 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
     public override fun getTrainTimes(departureStation: String, arrivalStation: String) {
         this.view.updateSearchResults(listOf("Loading..."))
        launch {
+           println(departureStation)
+           println(arrivalStation)
             val response: SerializableResponse = client.request("https://mobile-api-softwire2.lner.co.uk/v1/fares?originStation=$departureStation&destinationStation=$arrivalStation&noChanges=false&numberOfAdults=2&numberOfChildren=0&journeyType=single&outboundDateTime=2021-07-24T14%3A30%3A00.000%2B01%3A00&outboundIsArriveBy=false")
-            /*val response: SerializableResponse = client.request("https://mobile-api-softwire2.lner.co.uk/v1/fares/") {
-                method = HttpMethod.Get
-                parameter("originStation", departureStation)
-                parameter("destinationStation", arrivalStation)
-                parameter("noChanges", "false")
-                parameter("numberOfAdults", "1")
-                parameter("numberOfChildren", "0")
-                parameter("journeyType", "single")
-                parameter("outboundDateTime", "2021-07-24T14%3A30%3A00.000%2B01%3A00")
-                parameter("outboundIsArriveBy", "false")
-            }*/
+
            updateSearchResults(
                 serializableResponseToStringArray(response), response.outboundJourneys)
+
+        }
+    }
+
+    private fun onGetStationsList(serializableStations: SerializableStations) {
+        val stations = serializableStations.stations.sortedBy { it.name }
+        var names: MutableList<String> = mutableListOf<String>()
+        val codes: MutableList<String> = mutableListOf<String>()
+        for (station in stations) {
+            if (!station.crs.isNullOrEmpty()
+                && !station.name.contains("London Zone")) {
+                names.add(station.name)
+                codes.add(station.crs)
+            }
+        }
+        this.view?.onGetStationsList(names, codes)
+    }
+
+    fun getStations() {
+        launch {
+            val response: SerializableStations = client.request("https://mobile-api-softwire1.lner.co.uk/v1/stations")
+            onGetStationsList(response)
         }
     }
 
