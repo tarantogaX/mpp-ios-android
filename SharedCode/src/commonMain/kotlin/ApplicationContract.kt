@@ -5,6 +5,7 @@ import kotlinx.coroutines.CoroutineScope
 interface ApplicationContract {
     interface View {
         fun setLabel(text: String)
+        fun updateSearchResults(results: List<String>)
     }
 
     abstract class Presenter: CoroutineScope {

@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Spinner
 import android.widget.TextView
-//import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.runBlocking
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -58,5 +57,9 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
 //        val intent = Intent(Intent.ACTION_VIEW)
 //        intent.data = Uri.parse(url)
 //        startActivity(intent)
+    }
+
+    override fun updateSearchResults(results: List<String>) {
+
     }
 }
