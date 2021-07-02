@@ -12,13 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.runBlocking
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
     lateinit var departureStationSpinner: Spinner
     lateinit var arrivalStationSpinner: Spinner
     private lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var adapter: RecyclerAdapter
+
+//    private lateinit var linearLayoutManager: RecyclerView.LinearLayoutManager
 
     private val presenter: ApplicationPresenter = ApplicationPresenter()
 
@@ -41,6 +42,9 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         arrivalStationSpinner = findViewById<Spinner>(R.id.stations_spinner2) as Spinner
         departureStationSpinner.setSelection(0)
         arrivalStationSpinner.setSelection(0)
+
+//        linearLayoutManager = LinearLayoutManager(this)
+//        recyclerView.layoutManager = linearLayoutManager
     }
 
     override fun setLabel(text: String) {
@@ -66,5 +70,9 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
 //        val intent = Intent(Intent.ACTION_VIEW)
 //        intent.data = Uri.parse(url)
 //        startActivity(intent)
+    }
+
+    override fun updateSearchResults(results: List<String>) {
+
     }
 }
