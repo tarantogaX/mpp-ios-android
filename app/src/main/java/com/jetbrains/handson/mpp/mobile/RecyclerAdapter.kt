@@ -63,6 +63,8 @@ class RecyclerAdapter(context: Context, journeys: List<OutboundJourney>) : Recyc
         }
     }
 
+
+
     override fun getItemCount(): Int {
         return this.mData.size
     }

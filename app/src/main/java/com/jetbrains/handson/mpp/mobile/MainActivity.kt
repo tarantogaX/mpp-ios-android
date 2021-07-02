@@ -65,6 +65,8 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
         presenter.getTrainTimes(departureCode, arrivalCode)
 
+
+
 //        println("printed msg")
 
 //        val intent = Intent(Intent.ACTION_VIEW)
@@ -72,7 +74,16 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
 //        startActivity(intent)
     }
 
-    fun updateSearchResults(results: List<String>) {
+    override fun updateSearchResults(results: List<String>) {
 
+    }
+
+    override fun getOutboundJourneyObjects(outboundJourneys: List<OutboundJourney>) {
+        linearLayoutManager = LinearLayoutManager(this)
+        var recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = linearLayoutManager
+
+        adapter = RecyclerAdapter(this, outboundJourneys)
+        recyclerView.adapter = adapter
     }
 }
