@@ -54,7 +54,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
             serializer = KotlinxSerializer(kotlinx.serialization.json.Json { this.ignoreUnknownKeys = true; this.isLenient = true})
         }
     }
-
+    
     fun updateSearchResults(results: List<String>) {
         this.view?.setLabel("a")
         this.view?.updateSearchResults(results)
@@ -66,19 +66,10 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
            println(departureStation)
            println(arrivalStation)
             val response: SerializableResponse = client.request("https://mobile-api-softwire2.lner.co.uk/v1/fares?originStation=$departureStation&destinationStation=$arrivalStation&noChanges=false&numberOfAdults=2&numberOfChildren=0&journeyType=single&outboundDateTime=2021-07-24T14%3A30%3A00.000%2B01%3A00&outboundIsArriveBy=false")
-            /*val response: SerializableResponse = client.request("https://mobile-api-softwire2.lner.co.uk/v1/fares/") {
-                method = HttpMethod.Get
-                parameter("originStation", departureStation)
-                parameter("destinationStation", arrivalStation)
-                parameter("noChanges", "false")
-                parameter("numberOfAdults", "1")
-                parameter("numberOfChildren", "0")
-                parameter("journeyType", "single")
-                parameter("outboundDateTime", "2021-07-24T14%3A30%3A00.000%2B01%3A00")
-                parameter("outboundIsArriveBy", "false")
-            }*/
+
            updateSearchResults(
                 serializableResponseToStringArray(response))
+
         }
     }
 
