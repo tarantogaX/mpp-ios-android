@@ -6,6 +6,7 @@ interface ApplicationContract {
     interface View {
         fun setLabel(text: String)
         fun updateSearchResults(results: List<String>)
+        fun onGetStationsList(stations: List<String>, codes: List<String>)
     }
 
     abstract class Presenter: CoroutineScope {

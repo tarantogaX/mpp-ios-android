@@ -38,6 +38,10 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         //findViewById<TextView>(R.id.main_text).text = text
     }
 
+    override fun onGetStationsList(stations: List<String>, codes: List<String>) {
+
+    }
+
     fun onSubmitClicked(view: View) {
 
         var departureCode = departureStationSpinner.selectedItem.toString()
