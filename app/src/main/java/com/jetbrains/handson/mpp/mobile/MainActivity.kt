@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.runBlocking
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -14,6 +16,8 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
 
     lateinit var departureStationSpinner: Spinner
     lateinit var arrivalStationSpinner: Spinner
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    lateinit var adapter: RecyclerAdapter
 
 //    private lateinit var linearLayoutManager: RecyclerView.LinearLayoutManager
 
@@ -22,6 +26,15 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        linearLayoutManager = LinearLayoutManager(this)
+        var recyclerView: RecyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = linearLayoutManager
+
+
+        adapter = RecyclerAdapter(this, listOf(OutboundJourney(arrivalTime = "Test", departureTime = "Test"), OutboundJourney(arrivalTime = "Test", departureTime = "Test"),OutboundJourney(arrivalTime = "Test", departureTime = "Test"),OutboundJourney(arrivalTime = "Test", departureTime = "Test")))
+        recyclerView.adapter = adapter
+
 
         presenter.onViewTaken(this)
 

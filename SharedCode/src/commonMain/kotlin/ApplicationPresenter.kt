@@ -42,6 +42,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
         }
     }
 
+
     fun updateSearchResults(results: List<String>) {
         this.view?.setLabel("a")
         this.view?.updateSearchResults(results)
