@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
     lateinit var departureStationSpinner: Spinner
     lateinit var arrivalStationSpinner: Spinner
     private lateinit var linearLayoutManager: LinearLayoutManager
+    lateinit var adapter: RecyclerAdapter
 
     private val presenter: ApplicationPresenter = ApplicationPresenter()
 
@@ -26,7 +27,13 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
         setContentView(R.layout.activity_main)
 
         linearLayoutManager = LinearLayoutManager(this)
+        var recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = linearLayoutManager
+
+
+        adapter = RecyclerAdapter(this, listOf(OutboundJourney(arrivalTime = "Test", departureTime = "Test"), OutboundJourney(arrivalTime = "Test", departureTime = "Test"),OutboundJourney(arrivalTime = "Test", departureTime = "Test"),OutboundJourney(arrivalTime = "Test", departureTime = "Test")))
+        recyclerView.adapter = adapter
+
 
         presenter.onViewTaken(this)
 

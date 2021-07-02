@@ -32,6 +32,8 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
         }
     }
 
+
+
     public fun getTrainTimes(departureStation: String, arrivalStation: String) {
         launch {
             try {
