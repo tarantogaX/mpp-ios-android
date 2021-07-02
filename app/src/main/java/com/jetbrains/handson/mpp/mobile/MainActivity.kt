@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity(), ApplicationContract.View {
             "https://www.lner.co.uk/travel-information/travelling-now/live-train-times/depart/$departureCode/$arrivalCode/#LiveDepResults"
 
         presenter.getTrainTimes(departureCode, arrivalCode)
-        presenter.
 
 //        println("printed msg")
 
