@@ -48,6 +48,7 @@ class ApplicationPresenter: ApplicationContract.Presenter() {
     }
 
     public override fun getTrainTimes(departureStation: String, arrivalStation: String) {
+        this.view.updateSearchResults(listOf("Loading..."))
        launch {
             val response: SerializableResponse = client.request("https://mobile-api-softwire2.lner.co.uk/v1/fares?originStation=$departureStation&destinationStation=$arrivalStation&noChanges=false&numberOfAdults=2&numberOfChildren=0&journeyType=single&outboundDateTime=2021-07-24T14%3A30%3A00.000%2B01%3A00&outboundIsArriveBy=false")
             /*val response: SerializableResponse = client.request("https://mobile-api-softwire2.lner.co.uk/v1/fares/") {

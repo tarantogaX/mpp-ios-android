@@ -45,7 +45,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     
-    var tableRows = ["cds", "vcdsfv", "dsv", "vdv"]
+    var tableRows: [String] = []
     
     func tableView(_ tableView: UITableView) -> Int {
         return tableRows.count
