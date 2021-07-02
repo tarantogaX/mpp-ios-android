@@ -55,11 +55,16 @@ class RecyclerAdapter(context: Context, journeys: List<OutboundJourney>) : Recyc
         return ViewHolder(view)
     }
 
+    private fun dateToTime(date: String): String {
+        val time = date.removeRange(0, 11)
+        return time.removeRange(5, time.length)
+    }
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val outboundJourney: OutboundJourney = mData[position]
         if (holder is ViewHolder) {
-            holder.departureTime.text = outboundJourney.departureTime
-            holder.arrivalTime.text = outboundJourney.arrivalTime
+            holder.departureTime.text = dateToTime(outboundJourney.departureTime)
+            holder.arrivalTime.text = dateToTime(outboundJourney.arrivalTime)
         }
     }
 
